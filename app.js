@@ -105,7 +105,7 @@ bot.dialog('hello', [
         var message = new builder.Message()
                     .attachmentLayout(builder.AttachmentLayout.carousel)
                     .attachments([new builder.HeroCard()
-                            .images([new builder.CardImage().url('http://s2.subirimagenes.com/otros/previo/thump_9832952img20180112wa0001.jpg')])
+                            .images([new builder.CardImage().url('https://image.ibb.co/fSyOUG/IMG_20180112_WA0001.jpg')])
                     ])
         session.send(message);
         session.send("HEY PIBE COMO ANDÁS? Justo me pillas en el gym, pero pídeme lo que quieras")
