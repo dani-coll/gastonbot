@@ -28,6 +28,10 @@ var bot = new builder.UniversalBot(connector, function (session) {
 var recognizer = new builder.LuisRecognizer(process.env.LUIS_MODEL_URL);
 bot.recognizer(recognizer);
 
+var inMemoryStorage = new builder.MemoryBotStorage();
+
+bot.set('storage', inMemoryStorage)
+
 bot.dialog('searchGif', [
     function (session, args, next) {
         console.log("hola")
@@ -109,7 +113,31 @@ bot.dialog('hello', [
                     ])
         session.send(message);
         session.send("HEY PIBE COMO ANDÁS? Justo me pillas en el gym, pero pídeme lo que quieras")
-        session.endDialog();
+
+        setInterval(() => {
+            var date = new Date();
+            var hour = date.getHours();
+            var minutes = date.getMinutes();
+            if(hour == 10 && minutes == 30) session.send("Boludo, recuerda pedir comida en las encarnas")
+            if(hour == 11 && minutes == 25) session.send("CHUIII, CHUIII, CHUIII, Nostrum en 5 minutos, quien se viene?")
+
+            var randomMessages = [
+                "Tranquilo, todavia no es hora de ir al nostrum",
+                "Esta noche salimos",
+                "Eh, te gusta la noche?",
+                "Que viva el fuuuuuuuuutbol",
+                "VIVA EL VINO DE CARTÓN",
+                "PARÁ, PARÁ",
+                "Mandale recuerdos a pere Benegol",
+                "Pere Benedetto!",
+                "Ese Piquéeee",
+                "Un Ping pong?"
+            ]
+            var number = Math.random() * (9 - 0) + 0;
+            session.send(randomMessages[Math.floor(number)])
+
+        }, 30000);
+    
     }
 ]).triggerAction({
     matches: 'hello',
