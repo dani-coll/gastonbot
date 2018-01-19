@@ -10,6 +10,7 @@ var spellService = require('./spell-service');
 var server = restify.createServer();
 server.listen(process.env.port || process.env.PORT || 3978, function () {
     console.log('%s listening to %s', server.name, server.url);
+    console.log("listen")
 });
 // Create connector and listen for messages
 var connector = new builder.ChatConnector({
@@ -19,7 +20,7 @@ var connector = new builder.ChatConnector({
 server.post('/api/messages', connector.listen());
 
 var bot = new builder.UniversalBot(connector, function (session) {
-    session.send('Sorry, I did not understand \'%s\'. Type \'help\' if you need assistance.', session.message.text);
+    session.send('Disculpe, no entendí un carajo \'%s\'. Teclea \'help\' si nesesitas ashuda.', session.message.text);
 });
 
 // You can provide your own model by specifing the 'LUIS_MODEL_URL' environment variable
@@ -29,6 +30,7 @@ bot.recognizer(recognizer);
 
 bot.dialog('searchGif', [
     function (session, args, next) {
+        console.log("hola")
         session.send('Welcome to the Hotels finder! We are analyzing your message: \'%s\'', session.message.text);
 
         // try extracting entities
