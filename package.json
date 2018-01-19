@@ -1,0 +1,22 @@
+{
+  "name": "gastonbot",
+  "version": "1.0.0",
+  "description": "Slackbot for itequia",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dani7cl/gastonbot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dani7cl/gastonbot/issues"
+  },
+  "homepage": "https://github.com/dani7cl/gastonbot#readme",
+  "dependencies": {
+    "restify": "^6.3.4"
+  }
+}
