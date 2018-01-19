@@ -54,8 +54,7 @@ bot.dialog('searchGif', [
             .searchGif(gif)
             .then(function (gifs) {
                 // args
-                console.log("tengo gifs")
-                session.send('I found a gif:');
+                session.send('LO VEO, LO VEO');
 
                 var message = new builder.Message()
                     .attachmentLayout(builder.AttachmentLayout.carousel)
