@@ -12,7 +12,6 @@ var SPELL_CHECK_API_URL = 'https://api.cognitive.microsoft.com/bing/v5.0/spellch
  * @returns {Promise} Promise with corrected text if succeeded, error otherwise.
  */
 exports.getCorrectedText = function (text) {
-    console.log("correcting text")
     return new Promise(
         function (resolve, reject) {
             if (text) {
