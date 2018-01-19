@@ -1,0 +1,71 @@
+{
+  "luis_schema_version": "2.1.0",
+  "versionId": "0.1",
+  "name": "ErLuis",
+  "desc": "",
+  "culture": "es-es",
+  "intents": [
+    {
+      "name": "None"
+    },
+    {
+      "name": "searchGif"
+    }
+  ],
+  "entities": [
+    {
+      "name": "searchGif"
+    }
+  ],
+  "composites": [],
+  "closedLists": [],
+  "bing_entities": [],
+  "model_features": [],
+  "regex_features": [],
+  "utterances": [
+    {
+      "text": "quiero un gif",
+      "intent": "searchGif",
+      "entities": [
+        {
+          "entity": "searchGif",
+          "startPos": 10,
+          "endPos": 12
+        }
+      ]
+    },
+    {
+      "text": "dame un gif",
+      "intent": "searchGif",
+      "entities": [
+        {
+          "entity": "searchGif",
+          "startPos": 8,
+          "endPos": 10
+        }
+      ]
+    },
+    {
+      "text": "ver un gif",
+      "intent": "searchGif",
+      "entities": [
+        {
+          "entity": "searchGif",
+          "startPos": 7,
+          "endPos": 9
+        }
+      ]
+    },
+    {
+      "text": "buscar gifs",
+      "intent": "searchGif",
+      "entities": [
+        {
+          "entity": "searchGif",
+          "startPos": 7,
+          "endPos": 10
+        }
+      ]
+    }
+  ]
+}
