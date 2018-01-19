@@ -136,6 +136,15 @@ bot.dialog('singSomething', [
     }
 ]).triggerAction({
     matches: 'help',
+});
+
+bot.dialog('nostrum', [
+    function (session, results) {
+        session.send("CHUIIIII! Cada día a las 11:30, NO PODÉS FALTAR");
+        session.endDialog();
+    }
+]).triggerAction({
+    matches: 'nostrum',
     onInterrupted: function (session) {
         session.send('Conexión interrumpida');
     }
