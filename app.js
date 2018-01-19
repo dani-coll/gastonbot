@@ -54,14 +54,6 @@ bot.dialog('searchGif', [
             .then(function (gifs) {
                 // args
 
-                var message2 = new builder.Message()
-                    .attachmentLayout(builder.AttachmentLayout.carousel)
-                    .attachments([new builder.HeroCard()
-                            .title("El Mesías Gastón siempre a su servicio")
-                            .images([new builder.CardImage().url('https://image.ibb.co/dYCBGw/gaston_mesias.jpg')])
-                    ])
-                session.send(message2);
-
                 var message = new builder.Message()
                     .attachmentLayout(builder.AttachmentLayout.carousel)
                     .attachments(gifs.map(gifAsAttachment));
@@ -74,6 +66,31 @@ bot.dialog('searchGif', [
     }
 ]).triggerAction({
     matches: 'searchGif',
+    onInterrupted: function (session) {
+        session.send('Conexión interrumpida');
+    }
+});
+
+
+bot.dialog('help', [
+    function (session, results) {
+        console.log("siuu")
+
+
+        var message = new builder.Message()
+                    .attachmentLayout(builder.AttachmentLayout.carousel)
+                    .attachments([new builder.HeroCard()
+                            .title("El Mesías Gastón siempre a su servicio")
+                            .images([new builder.CardImage().url('https://image.ibb.co/dYCBGw/gaston_mesias.jpg')])
+                    ])
+        session.send(message);
+        message = 'Prueba a poner "muestrame un gif de gatitos" por ejemplo';
+
+        session.send(message);
+        session.endDialog();
+    }
+]).triggerAction({
+    matches: 'help',
     onInterrupted: function (session) {
         session.send('Conexión interrumpida');
     }
