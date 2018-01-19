@@ -48,7 +48,6 @@ bot.dialog('searchGif', [
         }
     },
     function (session, results) {
-        console.log("siuu")
         var gif = results.gif;
 
         var message = 'EESSAAA!!! Buscando gifs de chicas, digoo de  %s';
@@ -80,8 +79,6 @@ bot.dialog('searchGif', [
 
 bot.dialog('help', [
     function (session, results) {
-        console.log("siuu")
-
 
         var message = new builder.Message()
                     .attachmentLayout(builder.AttachmentLayout.carousel)
@@ -105,8 +102,6 @@ bot.dialog('help', [
 
 bot.dialog('hello', [
     function (session, results) {
-        console.log("siuu")
-
 
         var message = new builder.Message()
                     .attachmentLayout(builder.AttachmentLayout.carousel)
@@ -152,22 +147,35 @@ bot.dialog('hello', [
 
 bot.dialog('singSomething', [
     function (session, results) {
-        console.log("singing")
+        return new builder.AudioCard(session)
+        .title('I am your father')
+        .subtitle('Star Wars: Episode V - The Empire Strikes Back')
+        .text('The Empire Strikes Back (also known as Star Wars: Episode V – The Empire Strikes Back) is a 1980 American epic space opera film directed by Irvin Kershner. Leigh Brackett and Lawrence Kasdan wrote the screenplay, with George Lucas writing the film\'s story and serving as executive producer. The second installment in the original Star Wars trilogy, it was produced by Gary Kurtz for Lucasfilm Ltd. and stars Mark Hamill, Harrison Ford, Carrie Fisher, Billy Dee Williams, Anthony Daniels, David Prowse, Kenny Baker, Peter Mayhew and Frank Oz.')
+        .image(builder.CardImage.create(session, 'https://upload.wikimedia.org/wikipedia/en/3/3c/SW_-_Empire_Strikes_Back.jpg'))
+        .media([
+            { url: 'http://www.wavlist.com/movies/004/father.wav' }
+        ])
+        .buttons([
+            builder.CardAction.openUrl(session, 'https://en.wikipedia.org/wiki/The_Empire_Strikes_Back', 'Read More')
+        ]);
+        // console.log("singing")
         
-        var message = new builder.Message()
-                    .attachmentLayout(builder.AttachmentLayout.carousel)
-                    .attachments([new builder.HeroCard()
-                            .title("El Mesías Gastón siempre a su servicio")
-                            .images([new builder.CardImage().url('https://image.ibb.co/dYCBGw/gaston_mesias.jpg')])
-                    ])
-        session.send(message);
-        message = 'Prueba a poner "muestrame un gif de gatitos" por ejemplo';
-
-        session.send(message);
-        session.endDialog();
+        // try {
+        //     return new builder.AudioCard(session)
+        //     .title('Aquí tenés la cansión')
+        //     .subtitle('Pere benegoool!!!!')
+        //     .media([
+        //         { url: 'http://www.wavlist.com/movies/004/father.wav' }
+        //     ]);
+        // } catch (error) {
+        //     console.log(error)
+        // }
     }
 ]).triggerAction({
-    matches: 'help',
+    matches: 'singSomething',
+    onInterrupted: function (session) {
+        session.send('Conexión interrumpida');
+    }
 });
 
 bot.dialog('nostrum', [
