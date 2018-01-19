@@ -108,11 +108,34 @@ bot.dialog('hello', [
                             .images([new builder.CardImage().url('https://image.ibb.co/fSyOUG/IMG_20180112_WA0001.jpg')])
                     ])
         session.send(message);
-        session.send("HEY PIBE COMO ANDÁS? Justo me pillas en el gym, pero pídeme lo que quieras")
+        session.send("HEY PIBE COMO ANDÁS? Justo me pillas en el gym, pero pedime lo que quieras")
         session.endDialog();
     }
 ]).triggerAction({
     matches: 'hello',
+    onInterrupted: function (session) {
+        session.send('Conexión interrumpida');
+    }
+});
+
+bot.dialog('singSomething', [
+    function (session, results) {
+        console.log("singing")
+        
+        var message = new builder.Message()
+                    .attachmentLayout(builder.AttachmentLayout.carousel)
+                    .attachments([new builder.HeroCard()
+                            .title("El Mesías Gastón siempre a su servicio")
+                            .images([new builder.CardImage().url('https://image.ibb.co/dYCBGw/gaston_mesias.jpg')])
+                    ])
+        session.send(message);
+        message = 'Prueba a poner "muestrame un gif de gatitos" por ejemplo';
+
+        session.send(message);
+        session.endDialog();
+    }
+]).triggerAction({
+    matches: 'help',
     onInterrupted: function (session) {
         session.send('Conexión interrumpida');
     }
