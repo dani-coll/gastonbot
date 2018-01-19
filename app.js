@@ -121,7 +121,7 @@ bot.dialog('hello', [
 
 bot.dialog('nostrum', [
     function (session, results) {
-        session.send("CADA DÍA A LAS 11:30, NO PODÉS FALTAR");
+        session.send("CHUIIIII! Cada día a las 11:30, NO PODÉS FALTAR");
         session.endDialog();
     }
 ]).triggerAction({
