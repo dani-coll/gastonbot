@@ -4,17 +4,14 @@ const request = require('request');
 
 module.exports = {
     searchGif: function (gif) {
-        console.log("promise")
         let url = 'https://www.googleapis.com/customsearch/v1?key=' + process.env.GOOGLE_API_KEY + '&cx=' + process.env.SEARCH_ENGINE_ID + '&q=gif+de+' + gif
         return this.request(url)
             .then((data) => {
-        
                     var gifs = [];
                     gifs.push({
                         name: gif,
                         image: data.items[0].pagemap.metatags[0]['og:image']
                     });
-                    console.log(data.items[0].pagemap.metatags[0]['og:image']);
                     return gifs
             })
             

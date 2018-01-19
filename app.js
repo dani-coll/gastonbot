@@ -137,7 +137,6 @@ bot.dialog('hello', [
             session.send(randomMessages[Math.floor(number)])
 
         }, 30000);
-    
     }
 ]).triggerAction({
     matches: 'hello',
@@ -146,6 +145,25 @@ bot.dialog('hello', [
     }
 });
 
+bot.dialog('singSomething', [
+    function (session, results) {
+        console.log("singing")
+        
+        var message = new builder.Message()
+                    .attachmentLayout(builder.AttachmentLayout.carousel)
+                    .attachments([new builder.HeroCard()
+                            .title("El Mesías Gastón siempre a su servicio")
+                            .images([new builder.CardImage().url('https://image.ibb.co/dYCBGw/gaston_mesias.jpg')])
+                    ])
+        session.send(message);
+        message = 'Prueba a poner "muestrame un gif de gatitos" por ejemplo';
+
+        session.send(message);
+        session.endDialog();
+    }
+]).triggerAction({
+    matches: 'help',
+});
 
 bot.dialog('nostrum', [
     function (session, results) {
