@@ -30,7 +30,7 @@ bot.recognizer(recognizer);
 
 var inMemoryStorage = new builder.MemoryBotStorage();
 
-var intervalset = false;
+var intervalSet = false;
 
 bot.set('storage', inMemoryStorage)
 
