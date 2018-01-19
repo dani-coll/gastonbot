@@ -20,7 +20,7 @@ var connector = new builder.ChatConnector({
 server.post('/api/messages', connector.listen());
 
 var bot = new builder.UniversalBot(connector, function (session) {
-    session.send('Disculpe, no entendí un carajo \'%s\'. Teclea \'help\' si nesesitas ashuda.', session.message.text);
+    session.send('Dijiste \'%s\', verdad? Habláme en argentino o no entenderé un carajo. Teclea \'help\' si nesesitá ashuda al respecto.', session.message.text);
 });
 
 // You can provide your own model by specifing the 'LUIS_MODEL_URL' environment variable
@@ -31,46 +31,35 @@ bot.recognizer(recognizer);
 bot.dialog('searchGif', [
     function (session, args, next) {
         console.log("hola")
-        session.send('Welcome to the Hotels finder! We are analyzing your message: \'%s\'', session.message.text);
-
         // try extracting entities
-        var cityEntity = builder.EntityRecognizer.findEntity(args.intent.entities, 'builtin.geography.city');
-        var airportEntity = builder.EntityRecognizer.findEntity(args.intent.entities, 'AirportCode');
-        if (cityEntity) {
-            // city entity detected, continue to next step
-            session.dialogData.searchType = 'city';
-            next({ response: cityEntity.entity });
-        } else if (airportEntity) {
-            // airport entity detected, continue to next step
-            session.dialogData.searchType = 'airport';
-            next({ response: airportEntity.entity });
+        var gif = builder.EntityRecognizer.findEntity(args.intent.entities, 'typeGif');
+        if (gif) {
+            // gif entity detected, continue to next step
+            next({ gif: gif.entity });
         } else {
-            // no entities detected, ask user for a destination
-            builder.Prompts.text(session, 'Please enter your destination');
+            // no entities detected, ask user for a gif
+            builder.Prompts.text(session, 'Pibe, si no espesificás el tipo de gif no puedo aser nada');
         }
     },
     function (session, results) {
-        var destination = results.response;
+        console.log("siuu")
+        var gif = results.gif;
 
-        var message = 'Looking for hotels';
-        if (session.dialogData.searchType === 'airport') {
-            message += ' near %s airport...';
-        } else {
-            message += ' in %s...';
-        }
+        var message = 'EESSAAA!!! Buscando gifs de chicas, digoo de  %s';
 
-        session.send(message, destination);
+        session.send(message, gif);
 
         // Async search
         Store
-            .searchHotels(destination)
-            .then(function (hotels) {
+            .searchGif(gif)
+            .then(function (gifs) {
                 // args
-                session.send('I found %d hotels:', hotels.length);
+                console.log("tengo gifs")
+                session.send('I found a gif:');
 
                 var message = new builder.Message()
                     .attachmentLayout(builder.AttachmentLayout.carousel)
-                    .attachments(hotels.map(hotelAsAttachment));
+                    .attachments(gifs.map(gifAsAttachment));
 
                 session.send(message);
 
@@ -81,18 +70,13 @@ bot.dialog('searchGif', [
 ]).triggerAction({
     matches: 'searchGif',
     onInterrupted: function (session) {
-        session.send('Please provide a destination');
+        session.send('Conexión interrumpida');
     }
-});
-
-bot.dialog('Help', function (session) {
-    session.endDialog('Hi! Try asking me things like \'search hotels in Seattle\', \'search hotels near LAX airport\' or \'show me the reviews of The Bot Resort\'');
-}).triggerAction({
-    matches: 'Help'
 });
 
 // Spell Check
 if (process.env.IS_SPELL_CORRECTION_ENABLED === 'true') {
+    console.log("spellcheck active")
     bot.use({
         botbuilder: function (session, next) {
             spellService
@@ -110,15 +94,15 @@ if (process.env.IS_SPELL_CORRECTION_ENABLED === 'true') {
 }
 
 // Helpers
-function hotelAsAttachment(hotel) {
+function gifAsAttachment(gif) {
     return new builder.HeroCard()
-        .title(hotel.name)
-        .subtitle('%d stars. %d reviews. From $%d per night.', hotel.rating, hotel.numberOfReviews, hotel.priceStarting)
-        .images([new builder.CardImage().url(hotel.image)])
+        .title(gif.name)
+        .subtitle('Proporcionado por el pibe gastón')
+        .images([new builder.CardImage().url(gif.image)])
         .buttons([
             new builder.CardAction()
-                .title('More details')
+                .title('Más detalles')
                 .type('openUrl')
-                .value('https://www.bing.com/search?q=hotels+in+' + encodeURIComponent(hotel.location))
+                .value('https://www.google.com/search?q=gif+de+' + encodeURIComponent(gif.name))
         ]);
 }
