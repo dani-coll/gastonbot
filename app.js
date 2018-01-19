@@ -54,7 +54,14 @@ bot.dialog('searchGif', [
             .searchGif(gif)
             .then(function (gifs) {
                 // args
-                session.send('LO VEO, LO VEO');
+
+                var message2 = new builder.Message()
+                    .attachmentLayout(builder.AttachmentLayout.carousel)
+                    .attachments([new builder.HeroCard()
+                            .title("El Mesías Gastón siempre a su servicio")
+                            .images([new builder.CardImage().url('https://image.ibb.co/dYCBGw/gaston_mesias.jpg')])
+                    ])
+                session.send(message2);
 
                 var message = new builder.Message()
                     .attachmentLayout(builder.AttachmentLayout.carousel)
@@ -97,7 +104,7 @@ function gifAsAttachment(gif) {
     return new builder.HeroCard()
         .title(gif.name)
         .subtitle('Proporcionado por el pibe gastón')
-        .images([new builder.CardImage().url(gif.image)])
+        .images([new builder.CardImage().url('https://media.giphy.com/media/uYh2E1meNXAFa/giphy.gif')])
         .buttons([
             new builder.CardAction()
                 .title('Más detalles')
