@@ -50,8 +50,7 @@ bot.dialog('searchGif', [
         session.send(message, gif);
 
         // Async search
-        Store
-            .searchGif(gif)
+        Store.searchGif(gif)
             .then(function (gifs) {
                 // args
 
@@ -104,11 +103,5 @@ function gifAsAttachment(gif) {
     return new builder.HeroCard()
         .title(gif.name)
         .subtitle('Proporcionado por el pibe gastón')
-        .images([new builder.CardImage().url('https://media.giphy.com/media/uYh2E1meNXAFa/giphy.gif')])
-        .buttons([
-            new builder.CardAction()
-                .title('Más detalles')
-                .type('openUrl')
-                .value('https://www.google.com/search?q=gif+de+' + encodeURIComponent(gif.name))
-        ]);
+        .images([new builder.CardImage().url(gif.image)]);
 }
