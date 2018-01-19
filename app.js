@@ -118,6 +118,19 @@ bot.dialog('hello', [
     }
 });
 
+
+bot.dialog('nostrum', [
+    function (session, results) {
+        session.send("CADA DÍA A LAS 11:30, NO PODÉS FALTAR");
+        session.endDialog();
+    }
+]).triggerAction({
+    matches: 'nostrum',
+    onInterrupted: function (session) {
+        session.send('Conexión interrumpida');
+    }
+});
+
 // Spell Check
 if (process.env.IS_SPELL_CORRECTION_ENABLED === 'true') {
     console.log("spellcheck active")
