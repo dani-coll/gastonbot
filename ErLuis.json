@@ -14,7 +14,7 @@
   ],
   "entities": [
     {
-      "name": "searchGif"
+      "name": "typeGif"
     }
   ],
   "composites": [],
@@ -24,48 +24,31 @@
   "regex_features": [],
   "utterances": [
     {
-      "text": "quiero un gif",
+      "text": "buscar gifs de animales",
       "intent": "searchGif",
       "entities": [
         {
-          "entity": "searchGif",
-          "startPos": 10,
-          "endPos": 12
+          "entity": "typeGif",
+          "startPos": 15,
+          "endPos": 22
         }
       ]
     },
     {
-      "text": "dame un gif",
+      "text": "ver un gif de gatos",
       "intent": "searchGif",
       "entities": [
         {
-          "entity": "searchGif",
-          "startPos": 8,
-          "endPos": 10
+          "entity": "typeGif",
+          "startPos": 14,
+          "endPos": 18
         }
       ]
     },
     {
-      "text": "ver un gif",
+      "text": "dame un gif de pajaros",
       "intent": "searchGif",
-      "entities": [
-        {
-          "entity": "searchGif",
-          "startPos": 7,
-          "endPos": 9
-        }
-      ]
-    },
-    {
-      "text": "buscar gifs",
-      "intent": "searchGif",
-      "entities": [
-        {
-          "entity": "searchGif",
-          "startPos": 7,
-          "endPos": 10
-        }
-      ]
+      "entities": []
     }
   ]
 }

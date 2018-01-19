@@ -27,7 +27,7 @@ var bot = new builder.UniversalBot(connector, function (session) {
 var recognizer = new builder.LuisRecognizer(process.env.LUIS_MODEL_URL);
 bot.recognizer(recognizer);
 
-bot.dialog('SearchHotels', [
+bot.dialog('searchGif', [
     function (session, args, next) {
         session.send('Welcome to the Hotels finder! We are analyzing your message: \'%s\'', session.message.text);
 
@@ -77,27 +77,10 @@ bot.dialog('SearchHotels', [
             });
     }
 ]).triggerAction({
-    matches: 'SearchHotels',
+    matches: 'searchGif',
     onInterrupted: function (session) {
         session.send('Please provide a destination');
     }
-});
-
-bot.dialog('ShowHotelsReviews', function (session, args) {
-    // retrieve hotel name from matched entities
-    var hotelEntity = builder.EntityRecognizer.findEntity(args.intent.entities, 'Hotel');
-    if (hotelEntity) {
-        session.send('Looking for reviews of \'%s\'...', hotelEntity.entity);
-        Store.searchHotelReviews(hotelEntity.entity)
-            .then(function (reviews) {
-                var message = new builder.Message()
-                    .attachmentLayout(builder.AttachmentLayout.carousel)
-                    .attachments(reviews.map(reviewAsAttachment));
-                session.endDialog(message);
-            });
-    }
-}).triggerAction({
-    matches: 'ShowHotelsReviews'
 });
 
 bot.dialog('Help', function (session) {
@@ -136,11 +119,4 @@ function hotelAsAttachment(hotel) {
                 .type('openUrl')
                 .value('https://www.bing.com/search?q=hotels+in+' + encodeURIComponent(hotel.location))
         ]);
-}
-
-function reviewAsAttachment(review) {
-    return new builder.ThumbnailCard()
-        .title(review.title)
-        .text(review.text)
-        .images([new builder.CardImage().url(review.image)]);
 }
