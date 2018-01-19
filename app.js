@@ -96,6 +96,7 @@ bot.dialog('help', [
     matches: 'help',
     onInterrupted: function (session) {
         session.send('Conexión interrumpida');
+        session.endDialog()
     }
 });
 
@@ -110,6 +111,7 @@ bot.dialog('hello', [
                     ])
         session.send(message);
         session.send("HEY PIBE COMO ANDÁS? Justo me pillas en el gym, pero pídeme lo que quieras")
+        session.endDialog()
         if(!intervalSet)  {
             intervalSet = true;
             setInterval(() => {
@@ -142,6 +144,7 @@ bot.dialog('hello', [
     matches: 'hello',
     onInterrupted: function (session) {
         session.send('Conexión interrumpida');
+        session.endDialog()
     }
 });
 
@@ -175,6 +178,7 @@ bot.dialog('singSomething', [
     matches: 'singSomething',
     onInterrupted: function (session) {
         session.send('Conexión interrumpida');
+        session.endDialog()
     }
 });
 
@@ -187,6 +191,7 @@ bot.dialog('nostrum', [
     matches: 'nostrum',
     onInterrupted: function (session) {
         session.send('Conexión interrumpida');
+        session.endDialog()
     }
 });
 
