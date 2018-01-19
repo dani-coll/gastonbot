@@ -96,6 +96,28 @@ bot.dialog('help', [
     }
 });
 
+
+bot.dialog('hello', [
+    function (session, results) {
+        console.log("siuu")
+
+
+        var message = new builder.Message()
+                    .attachmentLayout(builder.AttachmentLayout.carousel)
+                    .attachments([new builder.HeroCard()
+                            .images([new builder.CardImage().url('http://s2.subirimagenes.com/otros/previo/thump_9832952img20180112wa0001.jpg')])
+                    ])
+        session.send(message);
+        session.send("HEY PIBE COMO ANDÁS? Justo me pillas en el gym, pero pídeme lo que quieras")
+        session.endDialog();
+    }
+]).triggerAction({
+    matches: 'hello',
+    onInterrupted: function (session) {
+        session.send('Conexión interrumpida');
+    }
+});
+
 // Spell Check
 if (process.env.IS_SPELL_CORRECTION_ENABLED === 'true') {
     console.log("spellcheck active")
